@@ -1,22 +1,48 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, KeyboardAvoidingView, Button, Image, TextInput, Alert } from 'react-native';
 import Test from './src/test';
 
 export default class App extends React.Component {
+
+  state = {
+      myText: ''
+  }
+
+  openAlert(){
+    // console.log('hi');
+    Alert.alert(
+      `${this.state.myText}`,
+      'Your Alert Message',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      { cancelable: false }
+    )
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello World!</Text>
-        <Test myText="Iphone 7"/>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Image
-        style={styles.image}
-        source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+          style={styles.image}
+          source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
         />
+        <Text style={styles.disclaimer}>This app is just for testing purposes. It'll do nothing except playing around and asquare. Get it?</Text>
+        <Test myText="For IE9 Only"/>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your name"
+          onChangeText={(text) => this.setState({ myText:text })}
+        />
+
         <Button
         style={styles.button} 
-        title="Push Me" onPress={()=>console.log('hello')}
+        title="Submit" onPress={ this.openAlert.bind(this) }
+        // title="Submit" onPress={()=>console.log(this.state.myText)
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -29,6 +55,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  disclaimer: {
+    width: 250,
+    padding: 10,
+    // alignItems: 'center',    
+    // justifyContent: 'center',
   },
   text: {
     width:300,
@@ -46,4 +78,9 @@ const styles = StyleSheet.create({
   button: {
     margin: 10,
   },
+  input: {
+    height: 40,
+    width: 200,
+    marginTop: 50,
+  }
 });

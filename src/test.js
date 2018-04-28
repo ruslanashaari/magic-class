@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { KeyboardAvoidingView, Text } from 'react-native';
 
 export default class test extends Component {
 	render() {
 		return (
-			<View style={styles.container}>
-				<Text style={styles.text}>Fixed Text : {this.props.myText}</Text>
-			</View>
+			<KeyboardAvoidingView style={styles.container}>
+				<Text style={styles.text}>Warning : {this.props.myText}</Text>
+			</KeyboardAvoidingView>
 		);
 	}
 }
@@ -16,6 +16,7 @@ const styles = {
 		width:300,
 		height:50,
 		padding: 10,
+		marginTop: 10,
 		backgroundColor:'#eaeaea',
 		justifyContent: 'center',
 		alignItems: 'center',
